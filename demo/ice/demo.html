@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ice demo</title>
+<script src="javascripts/jquery/jquery-1.7.2.js"></script>
+<script src="ice/ice.js"></script>
+<body>
+    <div id="content"></div>
+</body>
+
+<script type="text/html" id="tpl">
+    <div>here is the render result:</div>
+    <%  = this.title() ;%>
+    <table border=1>
+    <% for(var i=0,tl = this.trs.length,tr;i<tl;i++){  %>
+        <%
+            tr = this.trs[i];
+            if (tr.sex === "女") {
+        %>
+        <tr>
+        <td><%= tr.name;; %></td> <td><%= tr.age; %></td> <td><%= tr.sex || "男" %></td>
+        </tr>
+        <% } %>
+    <% } %>
+    </table>
+    <img src="<%= this.href %>">
+    <%= this.include('tpl2',this); %>
+</script>
+<script type="text/html" id="tpl2">
+    <div>here is the render result:</div>
+    <%  = this.print('Welcome to Ice Template') ;%>
+    <table border=1>
+    <% for(var i=0,tl = this.trs.length,tr;i<tl;i++){  %>
+        <%
+            tr = this.trs[i];
+            if (tr.sex === "男") {
+        %>
+        <tr>
+        <td><%= tr.name;; %></td> <td><%= tr.age; %></td> <td><%= tr.sex || "男" %></td>
+        </tr>
+        <% } %>
+    <% } %>
+    </table>
+    <img src="<%= this.href %>">
+
+</script>
+<script>
+    var trs = [
+        {name:"隐形杀手",age:29,sex:"男"},
+        {name:"索拉",age:22,sex:"男"},
+        {name:"fesyo",age:23,sex:"女"},
+        {name:"恋妖壶",age:18,sex:"男"},
+        {name:"竜崎",age:25,sex:"男"},
+        {name:"你不懂的",age:30,sex:"女"}
+    ]
+
+    // var html = ice("tpl",{
+    //     trs: trs,
+    //     href: "http://images.cnblogs.com/cnblogs_com/rubylouvre/202906/o_type4.jpg"
+    // },{
+    //     title: function(){
+    //         return "<p>这是使用视图helper输出的代码片断</p>"
+    //     }
+    // });
+    var elem = document.getElementById('tpl');
+    var tpl = elem.innerHTML;
+
+    var html = ice(tpl,{
+        trs: trs,
+        href: "http://images.cnblogs.com/cnblogs_com/rubylouvre/202906/o_type4.jpg"
+    },{
+        title: function(){
+            return "<p>这是使用视图helper输出的代码片断</p>"
+        }
+    });
+    console.log(html);
+    $("#content").html(html);
+ 
+</script>
+</html>
