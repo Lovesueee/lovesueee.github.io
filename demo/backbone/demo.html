@@ -20,14 +20,14 @@ var BookView = Backbone.View.extend({
 
         this.listenTo(this.model, 'change', this._change);
 　　　　　
-　　　　　this.$el.html(this.model.get('age'));
+　　　　　this.$el.html(this.model.get('price'));
 
         $('body').append(this.$el);
     },
 
     _change : function (model) {
       
-        this.$el.html(model.get('age'));
+        this.$el.html(model.get('price'));
     }
 });
 
@@ -41,7 +41,7 @@ var bookView = new BookView({
     model : bookModel,
 
     attributes : {
-        'title' : 'xxx'
+        'title' : 'span'
     },
 
     id : 'demo'
