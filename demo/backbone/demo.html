@@ -27,7 +27,7 @@ var BookView = Backbone.View.extend({
 
     _change : function (model) {
       
-        this.$el.html(model.get('price'));
+        this.$el.html('更新：' + model.get('price'));
     }
 });
 
@@ -47,6 +47,9 @@ var bookView = new BookView({
     id : 'demo'
 });
 
-bookModel.set('price', 30);
+
+setTimeout(function () {
+    bookModel.set('price', 30);
+}, 1000);
 </script>
 </html>
