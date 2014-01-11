@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ice demo</title>
+<script src="/javascripts/jquery/jquery-1.7.2.js"></script>
+<script src="/javascripts/backbone/backbone-1.1.0.js"></script>
+<body>
+</body>
+
+<script type="text/javascript">
+var BookModel = Backbone.Model.extend();
+
+var BookView = Backbone.View.extend({
+
+    tagName : 'span',
+
+    initialize : function () {
+
+        this.listenTo(this.model, 'change', this._change);
+　　　　　
+　　　　　this.$el.html(this.model.get('age'));
+
+        $('body').append(this.$el);
+    },
+
+    _change : function (model) {
+      
+        this.$el.html(model.get('age'));
+    }
+});
+
+
+var bookModel = new BookModel({
+    price : 10
+});
+
+var bookView = new BookView({
+
+    model : bookModel
+
+    attributes : {
+        'title' : 'xxx'
+    },
+
+    id : 'demo'
+});
+
+bookModel.set('price', 30);
+</script>
+</html>
